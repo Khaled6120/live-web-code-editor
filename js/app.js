@@ -35,3 +35,41 @@ function show_all(){
         document.getElementById("result").style.display="none";
     }
 }
+
+function saveLocal() {
+    const htmlCode = document.getElementById("htmlCode").value;
+    const cssCode = document.getElementById("cssCode").value;
+    const jsCode = document.getElementById("jsCode").value;
+    localStorage.setItem("htmlCode", htmlCode);
+    localStorage.setItem("cssCode", cssCode);
+    localStorage.setItem("jsCode", jsCode);
+  }
+  
+  function loadCode() {
+    const savedHtmlCode = localStorage.getItem("htmlCode");
+    const savedCssCode = localStorage.getItem("cssCode");
+    const savedJsCode = localStorage.getItem("jsCode");
+    if (savedHtmlCode !== null) {
+      document.getElementById("htmlCode").value = savedHtmlCode;
+    }
+    if (savedCssCode !== null) {
+      document.getElementById("cssCode").value = savedCssCode;
+    }
+    if (savedJsCode !== null) {
+      document.getElementById("jsCode").value = savedJsCode;
+    }
+  }
+  
+  const htmlEditor = document.getElementById("htmlCode");
+  htmlEditor.addEventListener("input", saveLocal);
+  
+  const cssEditor = document.getElementById("cssCode");
+  cssEditor.addEventListener("input", saveLocal);
+  
+  const jsEditor = document.getElementById("jsCode");
+  jsEditor.addEventListener("input", saveLocal);
+  
+  window.addEventListener("load", function () {
+    loadCode();
+    showPreview();
+  });
